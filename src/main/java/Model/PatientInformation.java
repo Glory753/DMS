@@ -6,20 +6,21 @@ import org.apache.log4j.Logger;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.*;
 
 
 public class PatientInformation {
 
-    public static void main(String[] args) {
+    public static Logger logger = Logger.getLogger(PatientInformation.class);
 
-        Logger logger = Logger.getLogger(PatientInformation.class);
+    public static void menu(Scanner in) {
+
         logger.info("info text");
 
         boolean patientInformation = true;
         PatientRepository pr = new PatientRepository();
         while (patientInformation) {
-            System.out.println("Select options: view all patients, add patient, quit");
-            Scanner in = new Scanner(System.in);
+            System.out.println("Select options: view all patients, add patient, remove patient, quit");
             String line = in.nextLine();
             if (line.equals("quit")) {
                 patientInformation = false;
@@ -38,8 +39,12 @@ public class PatientInformation {
                 int assignedDoctorId = Integer.parseInt(in.nextLine());
                 Patient newPatient = new Patient(id, firstName, lastName, phoneNumber, emailAddress, assignedDoctorId);
                 pr.addPatient(newPatient);
-            } else if (line.equals("view all patients")){
+            } else if (line.equals("view all patients")) {
                 System.out.println(pr.getAllPatients());
+            } else if (line.equals("remove patient")) {
+                System.out.println(("Patient ID: "));
+                int patientID = Integer.parseInt(in.nextLine());
+                pr.removePatient(patientID);
             }
         }
     }

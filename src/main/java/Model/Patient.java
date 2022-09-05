@@ -5,6 +5,7 @@ import java.math.BigInteger;
 public class Patient {
     public int patientID;
     public String firstName;
+
     public String lastName;
     public String phoneNumber;
     public String emailAddress;
