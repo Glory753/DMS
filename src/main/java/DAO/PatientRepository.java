@@ -1,5 +1,6 @@
 package DAO;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.sql.*;
 import java.util.List;
@@ -24,7 +25,7 @@ public class PatientRepository {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("Select * From Patient");
             while (rs.next()) {
-                Patient loadedPatient = new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"), rs.getInt("phoneNumber"), rs.getString("emailAddress"));
+                Patient loadedPatient = new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"), String.valueOf(rs.getInt("phoneNumber")), rs.getString("emailAddress"), rs.getInt("assignedDoctorId"));
                 allPatients.add(loadedPatient);
             }
         } catch (SQLException e) {
@@ -36,13 +37,14 @@ public class PatientRepository {
     public void addPatient(Patient p) {
         try {
             PatientRepository pr = new PatientRepository();
-            List<Patient> existingPatient = pr.getPatientByLastName(p.getLastName());
-            if (existingPatient.size() > 0) {
-            } else {
-                PreparedStatement statement = conn.prepareStatement("insert into (patient, patientID) " + "values (?, ?)");
+                PreparedStatement statement = conn.prepareStatement("insert into Patient (id, firstName, lastName, phoneNumber, emailAddress, assignedDoctorId) " + "values (?, ?, ?, ?, ?, ?)");
                 statement.setInt(1, p.getPatientID());
+                statement.setString(2,p.getFirstName());
+                statement.setString(3,p.getLastName());
+                statement.setString(4,p.getPhoneNumber());
+                statement.setString(5, p.getEmailAddress());
+                statement.setInt(6,p.getAssignedDoctorId());
                 statement.executeUpdate();
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -55,7 +57,7 @@ public class PatientRepository {
             statement.setString(1, LastName);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Patient loadedPatient = new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"), rs.getInt("phoneNumber"), rs.getString("emailAddress"));
+                Patient loadedPatient = new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"), String.valueOf(rs.getInt("phoneNumber")), rs.getString("emailAddress"), rs.getInt("assignedDoctorId"));
                 allPatients.add(loadedPatient);
             }
         } catch (SQLException e) {
@@ -71,7 +73,22 @@ public class PatientRepository {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                Patient loadedPatient = new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"), rs.getInt("phoneNumber"), rs.getString("emailAddress"));
+                Patient loadedPatient = new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"), String.valueOf(rs.getInt("phoneNumber")), rs.getString("emailAddress"), rs.getInt("assignedDoctorId"));
+                allPatients.add(loadedPatient);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allPatients;
+    }
+    public List<Patient> getPatientByAssignedDoctorID(int id) {
+        List<Patient> allPatients = new ArrayList<>();
+        try {
+            PreparedStatement statement = conn.prepareStatement("Select * From Patient inner join doctor on patient.assignedDoctorID = doctor.id");
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Patient loadedPatient = new Patient(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"), String.valueOf(rs.getInt("phoneNumber")), rs.getString("emailAddress"), rs.getInt("assignedDoctorId"));
                 allPatients.add(loadedPatient);
             }
         } catch (SQLException e) {

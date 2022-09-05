@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0d33023-6167-4a59-8419-31136e6b0aa2" name="Changes" comment="Second commit" />
+    <list default="true" id="d0d33023-6167-4a59-8419-31136e6b0aa2" name="Changes" comment="Second commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/DAO/DoctorRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/Doctor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/DoctorInformation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/PatientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Patient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/PatientInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/PatientInformation.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,7 +70,20 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.PatientInformation">
+  <component name="RunManager" selected="Application.DoctorInformation">
+    <configuration name="DoctorInformation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Model.DoctorInformation" />
+      <module name="DMS.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PatientInformation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Model.PatientInformation" />
       <module name="DMS.main" />
@@ -90,6 +113,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DoctorInformation" />
         <item itemvalue="Application.PatientInformation" />
       </list>
     </recent_temporary>
@@ -110,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662229489189</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Second commit">
+      <created>1662229707365</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1662229707365</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,6 +158,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Second commit" />
     <option name="LAST_COMMIT_MESSAGE" value="Second commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NumberFormatException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DMS$PatientRequest.ic" NAME="PatientRequest Coverage Results" MODIFIED="1661738180481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
