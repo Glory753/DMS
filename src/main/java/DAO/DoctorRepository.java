@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.List;
 
 import Model.Doctor;
+import Model.DoctorInformation;
 import Model.Patient;
 import Util.ConnectionUtil;
 import java.sql.Connection;
@@ -23,6 +24,7 @@ public class DoctorRepository {
 
     public List<Doctor> getAllDoctors() {
         List<Doctor> allDoctors = new ArrayList<>();
+        DoctorInformation.logger.info("getting all doctor information");
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("Select * From Doctor");
@@ -36,6 +38,7 @@ public class DoctorRepository {
         return allDoctors;
     }
     public void addDoctor(Doctor d) {
+        DoctorInformation.logger.info("adding doctor information");
         try {
                 PreparedStatement statement = conn.prepareStatement("insert into Doctor (id, doctorName, taxID) " + "values (?, ?, ?)");
                 statement.setInt(1, d.getDoctorID());
@@ -47,6 +50,7 @@ public class DoctorRepository {
         }
     }
     public List<Doctor> getDoctorByName(String Name) {
+        DoctorInformation.logger.info("getting doctor by name");
         List<Doctor> allDoctors = new ArrayList<>();
         try {
             PreparedStatement statement = conn.prepareStatement("Select * From Doctor Where Name = ?");
@@ -60,5 +64,15 @@ public class DoctorRepository {
             e.printStackTrace();
         }
         return allDoctors;
+    }
+    public void removeDoctor(int id) {
+        DoctorInformation.logger.info("removing doctor information");
+        try {
+            PreparedStatement statement = conn.prepareStatement("delete from Doctor where id = ?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

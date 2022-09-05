@@ -7,16 +7,17 @@ import java.math.BigInteger;
 import java.util.Scanner;
 
 public class DoctorInformation {
-    public static void main(String[] args) {
 
-        Logger logger = Logger.getLogger(DoctorInformation.class);
+    public static Logger logger = Logger.getLogger(DoctorInformation.class);
+
+    public static void menu(Scanner in) {
+
         logger.info("info text");
 
         boolean doctorInformation = true;
         DoctorRepository dr = new DoctorRepository();
         while (doctorInformation) {
-            System.out.println("Select options: view all doctors, add doctor, quit");
-            Scanner in = new Scanner(System.in);
+            System.out.println("Select options: view all doctors, add doctor, remove doctor, quit");
             String line = in.nextLine();
             if (line.equals("quit")) {
                 doctorInformation = false;
@@ -31,8 +32,11 @@ public class DoctorInformation {
                 dr.addDoctor(newDoctor);
             } else if (line.equals("view all doctors")){
                 System.out.println(dr.getAllDoctors());
+            } else if (line.equals("remove doctor")) {
+                System.out.println(("Doctor ID: "));
+                int doctorID = Integer.parseInt(in.nextLine());
+                dr.removeDoctor(doctorID);
             }
         }
     }
-
 }

@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.List;
 
 import Model.Patient;
+import Model.PatientInformation;
 import Util.ConnectionUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,6 +22,7 @@ public class PatientRepository {
 
     public List<Patient> getAllPatients() {
         List<Patient> allPatients = new ArrayList<>();
+        PatientInformation.logger.info("getting all patient information");
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery("Select * From Patient");
@@ -35,6 +37,7 @@ public class PatientRepository {
     }
 
     public void addPatient(Patient p) {
+        PatientInformation.logger.info("adding patient information");
         try {
             PatientRepository pr = new PatientRepository();
                 PreparedStatement statement = conn.prepareStatement("insert into Patient (id, firstName, lastName, phoneNumber, emailAddress, assignedDoctorId) " + "values (?, ?, ?, ?, ?, ?)");
@@ -51,6 +54,7 @@ public class PatientRepository {
     }
 
     public List<Patient> getPatientByLastName(String LastName) {
+        PatientInformation.logger.info("getting patient by last name");
         List<Patient> allPatients = new ArrayList<>();
         try {
             PreparedStatement statement = conn.prepareStatement("Select * From Patient Where lastName = ?");
@@ -67,6 +71,8 @@ public class PatientRepository {
     }
 
     public List<Patient> getPatientByPatientID(int id) {
+        PatientInformation.logger.info("getting patient by ID");
+
         List<Patient> allPatients = new ArrayList<>();
         try {
             PreparedStatement statement = conn.prepareStatement("Select * From Patient Where id = ?");
@@ -82,6 +88,8 @@ public class PatientRepository {
         return allPatients;
     }
     public List<Patient> getPatientByAssignedDoctorID(int id) {
+        PatientInformation.logger.info("getting patient by Assigned Doctor ID");
+
         List<Patient> allPatients = new ArrayList<>();
         try {
             PreparedStatement statement = conn.prepareStatement("Select * From Patient inner join doctor on patient.assignedDoctorID = doctor.id");
@@ -95,5 +103,15 @@ public class PatientRepository {
             e.printStackTrace();
         }
         return allPatients;
+    }
+    public void removePatient(int id) {
+        PatientInformation.logger.info("removing patient information");
+        try {
+            PreparedStatement statement = conn.prepareStatement("delete from Patient where id = ?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
